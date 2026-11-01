@@ -12,6 +12,9 @@ def home():
 def health():
     return {"status": "ok"}
 
-
+@app.route("/about")
+def about():
+    return "This app is protected by a DevSecOps pipeline."
+    
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=False)
