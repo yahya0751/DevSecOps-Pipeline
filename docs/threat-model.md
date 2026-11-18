@@ -49,19 +49,19 @@ Thirteen threats target the pipeline. Five of them are already controlled (marke
 
 | ID    | STRIDE type            | Threat                                                                              | Where | Control                                                                          | Task     | Status  |
 | ----- | ---------------------- | ----------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------------------- | -------- | ------- |
-| TH-S1 | Spoofing               | An attacker pushes code using a stolen GitHub login                                 | B1    | Two-factor authentication; branch protection with pull requests required         | T5       | Done |
-| TH-S2 | Spoofing               | A fork pull request runs as if trusted and gains access to secrets                  | B2    | Use the pull\_request trigger, never pull\_request\_target; no secrets for forks | T12      | Planned |
-| TH-T1 | Tampering              | A third-party action is replaced with malicious code, as in the tj-actions incident | B3    | Pin every action to a full commit SHA                                            | T5       | Done    |
-| TH-T2 | Tampering              | A malicious or vulnerable PyPI package is installed                                 | B3    | Pinned dependency versions; Trivy SCA                                            | T8       | Planned |
-| TH-T3 | Tampering              | A pull request edits ci.yml to skip the scanners                                    | B2    | Required status checks; gate fails if any scanner is skipped                     | T11, T12 | Planned |
-| TH-R1 | Repudiation            | A security exception is added with no record of who approved it                     | C2    | Exception file with reason, approver and expiry date; Git history as audit log   | T11      | Planned |
-| TH-I1 | Information disclosure | A secret is committed to the repository                                             | B1    | Gitleaks in pre-commit and in CI                                                 | T7       | Planned |
-| TH-I2 | Information disclosure | The Git credential is left on the runner after checkout                             | C3    | persist-credentials: false                                                       | T5       | Done    |
-| TH-I3 | Information disclosure | A secret is printed in the build logs                                               | B4    | Minimal secrets; GitHub log masking; SHA pinning                                 | T12      | Planned |
-| TH-D1 | Denial of service      | A stuck run blocks the pipeline                                                     | C3    | 10 minute job timeout                                                            | T5       | Done    |
-| TH-D2 | Denial of service      | The DAST scan hangs or runs too long                                                | C7    | Time-limited ZAP baseline scan                                                   | T9       | Planned |
-| TH-E1 | Elevation of privilege | The workflow token has write permissions it does not need                           | C3    | permissions: contents: read                                                      | T5       | Done    |
-| TH-E2 | Elevation of privilege | A pull request title is injected into a run command                                 | B2    | actionlint and zizmor workflow scanning                                          | T8       | Planned |
+| S1 | Spoofing               | An attacker pushes code using a stolen GitHub login                                 | B1    | Two-factor authentication; branch protection with pull requests required         | T5       | Done |
+| S2 | Spoofing               | A fork pull request runs as if trusted and gains access to secrets                  | B2    | Use the pull\_request trigger, never pull\_request\_target; no secrets for forks | T12      | Planned |
+| T1 | Tampering              | A third-party action is replaced with malicious code, as in the tj-actions incident | B3    | Pin every action to a full commit SHA                                            | T5       | Done    |
+| T2 | Tampering              | A malicious or vulnerable PyPI package is installed                                 | B3    | Pinned dependency versions; Trivy SCA                                            | T8       | Planned |
+| T3 | Tampering              | A pull request edits ci.yml to skip the scanners                                    | B2    | Required status checks; gate fails if any scanner is skipped                     | T11, T12 | Planned |
+| R1 | Repudiation            | A security exception is added with no record of who approved it                     | C2    | Exception file with reason, approver and expiry date; Git history as audit log   | T11      | Planned |
+| I1 | Information disclosure | A secret is committed to the repository                                             | B1    | Gitleaks in pre-commit and in CI                                                 | T7       | Planned |
+| I2 | Information disclosure | The Git credential is left on the runner after checkout                             | C3    | persist-credentials: false                                                       | T5       | Done    |
+| I3 | Information disclosure | A secret is printed in the build logs                                               | B4    | Minimal secrets; GitHub log masking; SHA pinning                                 | T12      | Planned |
+| D1 | Denial of service      | A stuck run blocks the pipeline                                                     | C3    | 10 minute job timeout                                                            | T5       | Done    |
+| D2 | Denial of service      | The DAST scan hangs or runs too long                                                | C7    | Time-limited ZAP baseline scan                                                   | T9       | Planned |
+| E1 | Elevation of privilege | The workflow token has write permissions it does not need                           | C3    | permissions: contents: read                                                      | T5       | Done    |
+| E2 | Elevation of privilege | A pull request title is injected into a run command                                 | B2    | actionlint and zizmor workflow scanning                                          | T8       | Planned |
 
 ## 5 Application threats
 
@@ -69,12 +69,12 @@ Six threats target the Flask application. Together they cover all eight CWE type
 
 | ID    | STRIDE type            | Threat                                                              | CWE                    | Where  | Control                    | Task   |
 | ----- | ---------------------- | ------------------------------------------------------------------- | ---------------------- | ------ | -------------------------- | ------ |
-| TH-T4 | Tampering              | Injection through user input into SQL, shell commands or HTML pages | CWE-89, CWE-78, CWE-79 | B5     | Semgrep; ZAP baseline scan | T7, T9 |
-| TH-T5 | Tampering              | An outdated library with a known vulnerability is used              | CWE-1104               | C5     | Trivy SCA                  | T8     |
-| TH-I4 | Information disclosure | Path traversal lets a user read files outside the intended folder   | CWE-22                 | B5     | Semgrep                    | T7     |
-| TH-I5 | Information disclosure | An API key is written in the source code                            | CWE-798                | C1, C2 | Gitleaks; Semgrep          | T7     |
-| TH-I6 | Information disclosure | Passwords are hashed with MD5 and are easy to crack                 | CWE-327                | C7     | Semgrep                    | T7     |
-| TH-E3 | Elevation of privilege | Untrusted data loaded with pickle runs attacker code                | CWE-502                | B5     | Semgrep                    | T7     |
+| T4 | Tampering              | Injection through user input into SQL, shell commands or HTML pages | CWE-89, CWE-78, CWE-79 | B5     | Semgrep; ZAP baseline scan | T7, T9 |
+| T5 | Tampering              | An outdated library with a known vulnerability is used              | CWE-1104               | C5     | Trivy SCA                  | T8     |
+| I4 | Information disclosure | Path traversal lets a user read files outside the intended folder   | CWE-22                 | B5     | Semgrep                    | T7     |
+| I5 | Information disclosure | An API key is written in the source code                            | CWE-798                | C1, C2 | Gitleaks; Semgrep          | T7     |
+| I6 | Information disclosure | Passwords are hashed with MD5 and are easy to crack                 | CWE-327                | C7     | Semgrep                    | T7     |
+| E3 | Elevation of privilege | Untrusted data loaded with pickle runs attacker code                | CWE-502                | B5     | Semgrep                    | T7     |
 
 ## 6 Controls already implemented
 
@@ -82,12 +82,12 @@ Four controls are already in .github/workflows/ci.yml, ahead of the plan. Each f
 
 | Control in ci.yml                   | Threat | Why it works                                                          |
 | ----------------------------------- | ------ | --------------------------------------------------------------------- |
-| Actions pinned to a full commit SHA | TH-T1  | A SHA cannot be moved to new code, unlike a tag such as v4            |
-| permissions: contents: read         | TH-E1  | The token can read the code but cannot change the repository          |
-| persist-credentials: false          | TH-I2  | The Git credential is not left on the runner for later steps to steal |
-| timeout-minutes: 10                 | TH-D1  | A stuck job is stopped instead of blocking the pipeline               |
+| Actions pinned to a full commit SHA | T1  | A SHA cannot be moved to new code, unlike a tag such as v4            |
+| permissions: contents: read         | E1  | The token can read the code but cannot change the repository          |
+| persist-credentials: false          | I2  | The Git credential is not left on the runner for later steps to steal |
+| timeout-minutes: 10                 | D1  | A stuck job is stopped instead of blocking the pipeline               |
 
-Branch protection on main was added on 18 November 2026 (task T5). It requires a pull request and a passing build-and-test check before any change reaches main, which controls TH-S1. Two-factor authentication on the maintainer account completes this control.
+Branch protection on main was added on 18 November 2026 (task T5). It requires a pull request and a passing build-and-test check before any change reaches main, which controls S1. Two-factor authentication on the maintainer account completes this control.
 
 The remaining 14 threats will be controlled in tasks T5 to T12, as shown in sections 4 and 5.
 

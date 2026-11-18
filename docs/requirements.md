@@ -28,9 +28,9 @@ Note: the numeric targets (80%, 20%) are proposals to be confirmed with the supe
 
 | R6 | Secrets in code are detected before merge | I1 | Gitleaks detects 100% of seeded fake secrets |
 
-| R7 | Injection and other code flaws are detected | T3, I3 | Semgrep detects at least 80% of seeded vulnerable cases |
+| R7 | Injection and other code flaws are detected | T4, I4, I6, E3 | Semgrep detects at least 80% of seeded vulnerable cases |
 
-| R8 | Vulnerable dependencies are detected | T2 | Trivy flags the seeded outdated library |
+| R8 | Vulnerable dependencies are detected | T2, T5 | Trivy flags the seeded outdated library |
 
 | R9 | Safe code is not wrongly flagged | All | False positives on safe look-alikes below 20% |
 
@@ -38,7 +38,7 @@ Note: the numeric targets (80%, 20%) are proposals to be confirmed with the supe
 
 | R11 | The gate fails on any scanner error | D2 | 100% of fault-injection tests end in a failed gate |
 
-| R12 | Pull requests from forks cannot use secrets or write access | E2 | Safe trigger used; zizmor reports no dangerous triggers |
+| R12 | Pull requests from forks cannot use secrets or write access | S2 | Safe trigger used; zizmor reports no dangerous triggers |
 
 | R13 | Exceptions are recorded with reason, approver and expiry | R1 | 100% of exceptions have all three fields; expired ones fail the gate |
 
